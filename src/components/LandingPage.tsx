@@ -8,6 +8,8 @@ interface LandingPageProps {
   onGetStarted: () => void
   lang: Language
   toggleLanguage: () => void
+  onPrivacyClick?: () => void
+  onTermsClick?: () => void
 }
 
 const content = {
@@ -103,7 +105,9 @@ const content = {
     },
     footer: {
       tagline: 'Professional flight logging for Romanian UAS pilots',
-      rights: '© 2024 Drone Logbook RO. All rights reserved.'
+      rights: '© 2024 Drone Logbook RO. All rights reserved.',
+      privacy: 'Privacy Policy',
+      terms: 'Terms of Service'
     }
   },
   ro: {
@@ -198,12 +202,14 @@ const content = {
     },
     footer: {
       tagline: 'Înregistrare profesională de zboruri pentru piloți UAS din România',
-      rights: '© 2024 Drone Logbook RO. Toate drepturile rezervate.'
+      rights: '© 2024 Drone Logbook RO. Toate drepturile rezervate.',
+      privacy: 'Politica de Confidențialitate',
+      terms: 'Termeni și Condiții'
     }
   }
 }
 
-export function LandingPage({ onGetStarted, lang, toggleLanguage }: LandingPageProps) {
+export function LandingPage({ onGetStarted, lang, toggleLanguage, onPrivacyClick, onTermsClick }: LandingPageProps) {
   const t = content[lang]
 
   return (
@@ -616,6 +622,25 @@ export function LandingPage({ onGetStarted, lang, toggleLanguage }: LandingPageP
               <p className="text-sm text-muted-foreground">
                 {t.footer.tagline}
               </p>
+              <div className="flex items-center justify-center gap-6">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={onPrivacyClick}
+                  className="text-muted-foreground hover:text-foreground"
+                >
+                  {t.footer.privacy}
+                </Button>
+                <div className="w-px h-4 bg-border" />
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={onTermsClick}
+                  className="text-muted-foreground hover:text-foreground"
+                >
+                  {t.footer.terms}
+                </Button>
+              </div>
               <p className="text-xs text-muted-foreground">
                 {t.footer.rights}
               </p>

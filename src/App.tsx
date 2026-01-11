@@ -134,6 +134,18 @@ function App() {
     setHasSeenLanding(true)
   }
 
+  const handleLandingPrivacy = () => {
+    setHasSeenLanding(true)
+    setHasCompletedOnboarding(true)
+    setActiveTab('privacy')
+  }
+
+  const handleLandingTerms = () => {
+    setHasSeenLanding(true)
+    setHasCompletedOnboarding(true)
+    setActiveTab('terms')
+  }
+
   const handleOnboardingComplete = (profileData: PilotProfile) => {
     setProfile(profileData)
     setHasCompletedOnboarding(true)
@@ -141,7 +153,13 @@ function App() {
   }
 
   if (!hasSeenLanding) {
-    return <LandingPage onGetStarted={handleGetStarted} lang={currentLang} toggleLanguage={toggleLanguage} />
+    return <LandingPage 
+      onGetStarted={handleGetStarted} 
+      lang={currentLang} 
+      toggleLanguage={toggleLanguage}
+      onPrivacyClick={handleLandingPrivacy}
+      onTermsClick={handleLandingTerms}
+    />
   }
 
   if (!hasCompletedOnboarding) {
