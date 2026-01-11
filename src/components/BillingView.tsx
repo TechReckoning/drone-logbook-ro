@@ -109,7 +109,7 @@ export function BillingView({ isPro, entriesCount, lang, onUpgrade }: BillingVie
 
             <Card className="border-2 border-accent hover:shadow-xl transition-all relative">
               <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-accent text-accent-foreground px-4 py-1 rounded-full text-sm font-bold">
-                BEST VALUE
+                {lang === 'en' ? 'MOST POPULAR' : 'CEL MAI POPULAR'}
               </div>
               <CardHeader>
                 <CardTitle className="flex items-center justify-between">
