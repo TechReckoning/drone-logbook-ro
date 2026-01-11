@@ -9,6 +9,7 @@ import { LogbookView } from '@/components/LogbookView'
 import { ProfileView } from '@/components/ProfileView'
 import { BillingView } from '@/components/BillingView'
 import { PrivacyView } from '@/components/PrivacyView'
+import { TermsView } from '@/components/TermsView'
 import { FlightDialog } from '@/components/FlightDialog'
 import { PDFExportDialog } from '@/components/PDFExportDialog'
 import { UpgradeDialog } from '@/components/UpgradeDialog'
@@ -160,12 +161,13 @@ function App() {
 
       <main className="container mx-auto px-4 py-8">
         <Tabs value={activeTab} onValueChange={setActiveTab}>
-          <TabsList className="grid w-full max-w-3xl mx-auto grid-cols-5 mb-8">
+          <TabsList className="grid w-full max-w-3xl mx-auto grid-cols-6 mb-8">
             <TabsTrigger value="dashboard">{text.nav.dashboard}</TabsTrigger>
             <TabsTrigger value="logbook">{text.nav.logbook}</TabsTrigger>
             <TabsTrigger value="profile">{text.nav.profile}</TabsTrigger>
             <TabsTrigger value="billing">{text.nav.billing}</TabsTrigger>
             <TabsTrigger value="privacy">{text.nav.privacy}</TabsTrigger>
+            <TabsTrigger value="terms">{text.nav.terms}</TabsTrigger>
           </TabsList>
 
           <TabsContent value="dashboard">
@@ -217,6 +219,10 @@ function App() {
 
           <TabsContent value="privacy">
             <PrivacyView lang={currentLang} />
+          </TabsContent>
+
+          <TabsContent value="terms">
+            <TermsView lang={currentLang} />
           </TabsContent>
         </Tabs>
       </main>

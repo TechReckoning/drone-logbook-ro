@@ -9,7 +9,8 @@ export const translations = {
       logbook: 'Logbook',
       profile: 'Profile',
       billing: 'Billing',
-      privacy: 'Privacy'
+      privacy: 'Privacy',
+      terms: 'Terms'
     },
     dashboard: {
       completeProfile: 'Complete Profile',
@@ -162,7 +163,8 @@ export const translations = {
       logbook: 'Jurnal',
       profile: 'Profil',
       billing: 'Abonament',
-      privacy: 'Confidențialitate'
+      privacy: 'Confidențialitate',
+      terms: 'Termeni'
     },
     dashboard: {
       completeProfile: 'Completează Profilul',
