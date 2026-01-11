@@ -13,6 +13,8 @@ import { TermsView } from '@/components/TermsView'
 import { FlightDialog } from '@/components/FlightDialog'
 import { PDFExportDialog } from '@/components/PDFExportDialog'
 import { UpgradeDialog } from '@/components/UpgradeDialog'
+import { LandingPage } from '@/components/LandingPage'
+import { OnboardingFlow } from '@/components/OnboardingFlow'
 import { generatePDF } from '@/lib/pdf'
 import type { PilotProfile, FlightEntry, FilterScope } from '@/lib/types'
 import type { Language } from '@/lib/translations'
@@ -24,6 +26,8 @@ function App() {
   const [entries, setEntries] = useKV<FlightEntry[]>('flight-entries', [])
   const [isPro, setIsPro] = useKV<boolean>('is-pro', false)
   const [lang, setLang] = useKV<Language>('language', 'en')
+  const [hasSeenLanding, setHasSeenLanding] = useKV<boolean>('has-seen-landing', false)
+  const [hasCompletedOnboarding, setHasCompletedOnboarding] = useKV<boolean>('has-completed-onboarding', false)
 
   const [activeTab, setActiveTab] = useState('dashboard')
   const [flightDialogOpen, setFlightDialogOpen] = useState(false)
@@ -124,6 +128,24 @@ function App() {
 
   const toggleLanguage = () => {
     setLang((currentLang) => (currentLang || 'en') === 'en' ? 'ro' : 'en')
+  }
+
+  const handleGetStarted = () => {
+    setHasSeenLanding(true)
+  }
+
+  const handleOnboardingComplete = (profileData: PilotProfile) => {
+    setProfile(profileData)
+    setHasCompletedOnboarding(true)
+    toast.success(currentLang === 'en' ? 'Welcome! Your profile is set up.' : 'Bun venit! Profilul tău este configurat.')
+  }
+
+  if (!hasSeenLanding) {
+    return <LandingPage onGetStarted={handleGetStarted} lang={currentLang} toggleLanguage={toggleLanguage} />
+  }
+
+  if (!hasCompletedOnboarding) {
+    return <OnboardingFlow onComplete={handleOnboardingComplete} lang={currentLang} />
   }
 
   const isProfileComplete = profile && profile.firstName && profile.lastName && 

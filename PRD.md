@@ -12,10 +12,24 @@ This is a focused data management tool with CRUD operations, filtering, and expo
 
 ## Essential Features
 
+### Landing Page & First-Time Experience
+- **Functionality**: Professional marketing page introducing the app with features, pricing, and call-to-action for new users
+- **Purpose**: Convert visitors into users by clearly communicating value proposition and compliance benefits
+- **Trigger**: First visit to the application (no previous session data)
+- **Progression**: View hero section with title/subtitle → Scroll to features section → Review pricing plans → Click "Get Started" → Landing dismissed, onboarding begins
+- **Success criteria**: Clear value communication, responsive design, smooth animations, bilingual support (EN/RO toggle)
+
+### Onboarding Flow
+- **Functionality**: Multi-step guided wizard collecting pilot profile information with validation and progress indication
+- **Purpose**: Ensure complete profile setup before first use, reducing friction later when generating PDFs
+- **Trigger**: User clicks "Get Started" from landing page
+- **Progression**: Step 1 (Personal): First/Last name → Step 2 (Contact): Address, Mobile, Landline → Step 3 (Certification): DOB, Certificate # → Completion screen → Dashboard
+- **Success criteria**: 3-step flow with progress bar, field validation, back/next navigation, data persists on completion, completion celebration screen
+
 ### Pilot Profile Management
 - **Functionality**: Captures and stores pilot identification and certification details required for official logbook exports
 - **Purpose**: Ensures PDF exports contain complete pilot information meeting regulatory standards
-- **Trigger**: User accesses "Profile" section from dashboard
+- **Trigger**: User accesses "Profile" section from dashboard (or completes onboarding)
 - **Progression**: View empty profile card → Click "Complete Profile" → Fill bilingual form (First/Last name, Address, Phone, DOB, Certificate #) → Validate → Save → Profile complete badge appears
 - **Success criteria**: All required fields validated, profile persists, PDF export becomes available
 
@@ -55,12 +69,15 @@ This is a focused data management tool with CRUD operations, filtering, and expo
 
 ## Edge Case Handling
 
+- **First-Time User**: Show landing page with features and pricing, then guide through onboarding wizard before accessing main app
+- **Returning User**: Skip landing page and onboarding if already completed, go straight to dashboard
 - **Empty Logbook State**: Display friendly illustration and "Add Your First Flight" CTA when no entries exist
 - **Incomplete Profile Export**: Disable PDF button with tooltip "Complete your pilot profile first" when profile fields are missing
 - **Invalid Time Format**: Show inline error for time inputs not matching HH:MM or exceeding 23:59, prevent save
 - **No Matching Filters**: Display "No flights found" message when filters return zero results, with "Clear Filters" button
 - **Entry Limit Reached**: Show full-screen overlay when attempting 6th entry, explaining Pro benefits
 - **Date Range Validation**: Ensure "from" date is before "to" date in custom range filters, show error otherwise
+- **Onboarding Exit**: User can refresh and will resume from dashboard if onboarding was completed; state persists
 
 ## Design Direction
 
@@ -101,6 +118,8 @@ Typography should convey **precision, legibility, and technical authority** appr
 
 Animations should feel **precise and purposeful** like cockpit instruments - smooth, immediate feedback with subtle mechanical precision. No playful bounces or elastic effects.
 
+- **Landing Page**: Hero section fades in with subtle upward motion (20px), feature cards stagger in on scroll with 100ms delay between each
+- **Onboarding**: Steps transition with slide animation (exit left, enter right), progress bar animates smoothly, completion check icon scales in with spring physics
 - **Micro-interactions**: Button presses have subtle scale (0.98) with 100ms duration and ease-out timing
 - **Data Entry**: Form inputs scale focus ring in 200ms with slight glow effect suggesting instrument illumination
 - **Modal Transitions**: Dialogs fade + scale from center (0.95 to 1.0) over 250ms, creating sense of depth
