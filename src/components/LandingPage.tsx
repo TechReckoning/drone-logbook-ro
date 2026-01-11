@@ -69,13 +69,11 @@ const content = {
         ],
         cta: 'Start Free'
       },
-      pro: {
-        title: 'Pro',
+      monthly: {
+        title: 'Pro Monthly',
         price: '€3.99',
         period: '/month',
-        yearlyPrice: '€29',
-        yearlyPeriod: '/year',
-        description: 'For professional pilots',
+        description: 'Flexible monthly billing',
         features: [
           'Unlimited flight entries',
           'Watermark-free PDF exports',
@@ -83,7 +81,23 @@ const content = {
           'Custom date range exports',
           'Priority support'
         ],
-        cta: 'Upgrade to Pro',
+        cta: 'Start Monthly'
+      },
+      yearly: {
+        title: 'Pro Yearly',
+        price: '€29',
+        period: '/year',
+        description: 'Best value for professionals',
+        savings: 'Save €19/year',
+        features: [
+          'Unlimited flight entries',
+          'Watermark-free PDF exports',
+          'Advanced filtering & search',
+          'Custom date range exports',
+          'Priority support',
+          '2 months free'
+        ],
+        cta: 'Start Yearly',
         popular: 'Most Popular'
       }
     },
@@ -150,13 +164,11 @@ const content = {
         ],
         cta: 'Începe Gratuit'
       },
-      pro: {
-        title: 'Pro',
+      monthly: {
+        title: 'Pro Lunar',
         price: '€3.99',
         period: '/lună',
-        yearlyPrice: '€29',
-        yearlyPeriod: '/an',
-        description: 'Pentru piloți profesioniști',
+        description: 'Facturare lunară flexibilă',
         features: [
           'Înregistrări nelimitate',
           'Export PDF fără watermark',
@@ -164,7 +176,23 @@ const content = {
           'Exporturi interval personalizat',
           'Suport prioritar'
         ],
-        cta: 'Upgrade la Pro',
+        cta: 'Începe Lunar'
+      },
+      yearly: {
+        title: 'Pro Anual',
+        price: '€29',
+        period: '/an',
+        description: 'Cea mai bună valoare',
+        savings: 'Economisești €19/an',
+        features: [
+          'Înregistrări nelimitate',
+          'Export PDF fără watermark',
+          'Filtrare și căutare avansată',
+          'Exporturi interval personalizat',
+          'Suport prioritar',
+          '2 luni gratuite'
+        ],
+        cta: 'Începe Anual',
         popular: 'Cel Mai Popular'
       }
     },
@@ -446,10 +474,10 @@ export function LandingPage({ onGetStarted, lang, toggleLanguage }: LandingPageP
             </h3>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto relative z-10">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto relative z-10">
             <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
               whileHover={{ scale: 1.02 }}
@@ -487,43 +515,26 @@ export function LandingPage({ onGetStarted, lang, toggleLanguage }: LandingPageP
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
               whileHover={{ scale: 1.02 }}
             >
-              <Card className="h-full border-primary border-2 relative overflow-hidden backdrop-blur-sm bg-card/80">
-                <motion.div 
-                  className="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5"
-                  animate={{
-                    opacity: [0.3, 0.5, 0.3],
-                  }}
-                  transition={{
-                    duration: 4,
-                    repeat: Infinity,
-                    ease: "easeInOut"
-                  }}
-                />
-                <div className="absolute top-4 right-4 bg-accent text-accent-foreground text-xs font-bold px-3 py-1 rounded-full z-10">
-                  {t.pricing.pro.popular}
-                </div>
-                <CardHeader className="pb-8 relative z-10">
-                  <CardTitle className="text-2xl">{t.pricing.pro.title}</CardTitle>
+              <Card className="h-full backdrop-blur-sm bg-card/80">
+                <CardHeader className="pb-8">
+                  <CardTitle className="text-2xl">{t.pricing.monthly.title}</CardTitle>
                   <div className="mt-4">
-                    <span className="text-4xl font-bold">{t.pricing.pro.price}</span>
-                    <span className="text-muted-foreground">{t.pricing.pro.period}</span>
-                  </div>
-                  <div className="text-sm text-muted-foreground">
-                    {lang === 'en' ? 'or ' : 'sau '}{t.pricing.pro.yearlyPrice}{t.pricing.pro.yearlyPeriod}
+                    <span className="text-4xl font-bold">{t.pricing.monthly.price}</span>
+                    <span className="text-muted-foreground">{t.pricing.monthly.period}</span>
                   </div>
                   <CardDescription className="text-base mt-2">
-                    {t.pricing.pro.description}
+                    {t.pricing.monthly.description}
                   </CardDescription>
                 </CardHeader>
-                <CardContent className="space-y-6 relative z-10">
+                <CardContent className="space-y-6">
                   <ul className="space-y-3">
-                    {t.pricing.pro.features.map((feature, index) => (
+                    {t.pricing.monthly.features.map((feature, index) => (
                       <li key={index} className="flex items-start gap-3">
                         <ShieldCheck size={20} className="text-primary shrink-0 mt-0.5" weight="bold" />
                         <span className="text-sm">{feature}</span>
@@ -532,10 +543,66 @@ export function LandingPage({ onGetStarted, lang, toggleLanguage }: LandingPageP
                   </ul>
                   <Button 
                     className="w-full" 
+                    variant="outline"
                     size="lg"
                     onClick={onGetStarted}
                   >
-                    {t.pricing.pro.cta}
+                    {t.pricing.monthly.cta}
+                  </Button>
+                </CardContent>
+              </Card>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              whileHover={{ scale: 1.05 }}
+            >
+              <Card className="h-full border-primary border-2 relative overflow-hidden backdrop-blur-sm bg-card/80 shadow-xl">
+                <motion.div 
+                  className="absolute inset-0 bg-gradient-to-br from-primary/10 to-accent/10"
+                  animate={{
+                    opacity: [0.4, 0.6, 0.4],
+                  }}
+                  transition={{
+                    duration: 4,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                />
+                <div className="absolute top-4 right-4 bg-accent text-accent-foreground text-xs font-bold px-3 py-1.5 rounded-full z-10 shadow-md">
+                  {t.pricing.yearly.popular}
+                </div>
+                <CardHeader className="pb-8 relative z-10">
+                  <CardTitle className="text-2xl">{t.pricing.yearly.title}</CardTitle>
+                  <div className="mt-4">
+                    <span className="text-4xl font-bold">{t.pricing.yearly.price}</span>
+                    <span className="text-muted-foreground">{t.pricing.yearly.period}</span>
+                  </div>
+                  <div className="text-sm font-semibold text-primary mt-1">
+                    {t.pricing.yearly.savings}
+                  </div>
+                  <CardDescription className="text-base mt-2">
+                    {t.pricing.yearly.description}
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-6 relative z-10">
+                  <ul className="space-y-3">
+                    {t.pricing.yearly.features.map((feature, index) => (
+                      <li key={index} className="flex items-start gap-3">
+                        <ShieldCheck size={20} className="text-primary shrink-0 mt-0.5" weight="bold" />
+                        <span className="text-sm">{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <Button 
+                    className="w-full shadow-lg" 
+                    size="lg"
+                    onClick={onGetStarted}
+                  >
+                    {t.pricing.yearly.cta}
                   </Button>
                 </CardContent>
               </Card>
