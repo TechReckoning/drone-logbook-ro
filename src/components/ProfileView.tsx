@@ -2,20 +2,23 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '@/components/ui/alert-dialog'
 import { useState, useEffect } from 'react'
 import type { PilotProfile } from '@/lib/types'
 import type { Language } from '@/lib/translations'
 import { t } from '@/lib/translations'
-import { User } from '@phosphor-icons/react'
+import { User, SignOut, Trash } from '@phosphor-icons/react'
 import { toast } from 'sonner'
 
 interface ProfileViewProps {
   profile: PilotProfile | null
   onSave: (profile: PilotProfile) => void
+  onLogout: () => void
+  onDeleteAccount: () => void
   lang: Language
 }
 
-export function ProfileView({ profile, onSave, lang }: ProfileViewProps) {
+export function ProfileView({ profile, onSave, onLogout, onDeleteAccount, lang }: ProfileViewProps) {
   const text = t(lang)
   
   const [firstName, setFirstName] = useState('')
@@ -195,6 +198,95 @@ export function ProfileView({ profile, onSave, lang }: ProfileViewProps) {
             <Button onClick={handleSave} className="bg-primary hover:bg-primary/90">
               {text.profile.save}
             </Button>
+          </div>
+        </CardContent>
+      </Card>
+
+      <Card className="border-muted">
+        <CardHeader>
+          <CardTitle className="text-lg">{text.profile.accountManagement}</CardTitle>
+          <CardDescription>
+            {lang === 'en' 
+              ? 'Manage your account settings and data' 
+              : 'Gestionează setările și datele contului'}
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div className="flex items-center justify-between p-4 bg-muted/50 rounded-lg">
+            <div className="flex items-center gap-3">
+              <div className="p-2 bg-background rounded-lg">
+                <SignOut size={20} className="text-foreground" />
+              </div>
+              <div>
+                <h3 className="font-semibold text-sm">{text.profile.logout}</h3>
+                <p className="text-xs text-muted-foreground">
+                  {lang === 'en' 
+                    ? 'Sign out from your account' 
+                    : 'Deconectează-te din cont'}
+                </p>
+              </div>
+            </div>
+            <AlertDialog>
+              <AlertDialogTrigger asChild>
+                <Button variant="outline" size="sm">
+                  {text.profile.logoutButton}
+                </Button>
+              </AlertDialogTrigger>
+              <AlertDialogContent>
+                <AlertDialogHeader>
+                  <AlertDialogTitle>{text.profile.logoutConfirm}</AlertDialogTitle>
+                  <AlertDialogDescription>
+                    {text.profile.logoutDescription}
+                  </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                  <AlertDialogCancel>{text.common.cancel}</AlertDialogCancel>
+                  <AlertDialogAction onClick={onLogout}>
+                    {text.profile.logoutButton}
+                  </AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
+          </div>
+
+          <div className="flex items-center justify-between p-4 bg-destructive/5 rounded-lg border border-destructive/20">
+            <div className="flex items-center gap-3">
+              <div className="p-2 bg-background rounded-lg">
+                <Trash size={20} className="text-destructive" />
+              </div>
+              <div>
+                <h3 className="font-semibold text-sm text-destructive">{text.profile.deleteAccount}</h3>
+                <p className="text-xs text-muted-foreground">
+                  {lang === 'en' 
+                    ? 'Permanently remove all your data' 
+                    : 'Șterge permanent toate datele tale'}
+                </p>
+              </div>
+            </div>
+            <AlertDialog>
+              <AlertDialogTrigger asChild>
+                <Button variant="destructive" size="sm">
+                  {text.profile.deleteButton}
+                </Button>
+              </AlertDialogTrigger>
+              <AlertDialogContent>
+                <AlertDialogHeader>
+                  <AlertDialogTitle>{text.profile.deleteConfirm}</AlertDialogTitle>
+                  <AlertDialogDescription>
+                    {text.profile.deleteDescription}
+                  </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                  <AlertDialogCancel>{text.common.cancel}</AlertDialogCancel>
+                  <AlertDialogAction 
+                    onClick={onDeleteAccount}
+                    className="bg-destructive hover:bg-destructive/90"
+                  >
+                    {text.profile.deleteButton}
+                  </AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
           </div>
         </CardContent>
       </Card>

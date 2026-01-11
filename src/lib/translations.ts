@@ -37,7 +37,16 @@ export const translations = {
       certificateNumber: 'Remote Pilot Certificate Number',
       optional: 'optional',
       save: 'Save Profile',
-      cancel: 'Cancel'
+      cancel: 'Cancel',
+      logout: 'Logout',
+      deleteAccount: 'Delete Account',
+      accountManagement: 'Account Management',
+      logoutConfirm: 'Are you sure you want to logout?',
+      logoutDescription: 'You will be returned to the landing page.',
+      deleteConfirm: 'Delete your account?',
+      deleteDescription: 'This will permanently delete your profile, all flight entries, and settings. This action cannot be undone.',
+      deleteButton: 'Delete My Account',
+      logoutButton: 'Logout'
     },
     logbook: {
       title: 'Flight Logbook',
@@ -191,7 +200,16 @@ export const translations = {
       certificateNumber: 'Număr Certificat Pilot Telecomandă',
       optional: 'opțional',
       save: 'Salvează Profil',
-      cancel: 'Anulează'
+      cancel: 'Anulează',
+      logout: 'Deconectare',
+      deleteAccount: 'Șterge Cont',
+      accountManagement: 'Gestionare Cont',
+      logoutConfirm: 'Sigur vrei să te deconectezi?',
+      logoutDescription: 'Vei fi redirecționat către pagina de start.',
+      deleteConfirm: 'Ștergi contul?',
+      deleteDescription: 'Aceasta va șterge permanent profilul, toate înregistrările de zbor și setările tale. Această acțiune nu poate fi anulată.',
+      deleteButton: 'Șterge Contul Meu',
+      logoutButton: 'Deconectare'
     },
     logbook: {
       title: 'Jurnal de Zbor',

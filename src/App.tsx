@@ -152,6 +152,27 @@ function App() {
     toast.success(currentLang === 'en' ? 'Welcome! Your profile is set up.' : 'Bun venit! Profilul tău este configurat.')
   }
 
+  const handleLogout = () => {
+    setHasSeenLanding(false)
+    setHasCompletedOnboarding(false)
+    toast.success(currentLang === 'en' ? 'Logged out successfully' : 'Deconectat cu succes')
+  }
+
+  const handleDeleteAccount = async () => {
+    const allKeys = await window.spark.kv.keys()
+    for (const key of allKeys) {
+      await window.spark.kv.delete(key)
+    }
+    
+    setProfile(null)
+    setEntries([])
+    setIsPro(false)
+    setHasSeenLanding(false)
+    setHasCompletedOnboarding(false)
+    
+    toast.success(currentLang === 'en' ? 'Account deleted successfully' : 'Cont șters cu succes')
+  }
+
   if (!hasSeenLanding) {
     return <LandingPage 
       onGetStarted={handleGetStarted} 
@@ -242,6 +263,8 @@ function App() {
             <ProfileView
               profile={profile || null}
               onSave={handleSaveProfile}
+              onLogout={handleLogout}
+              onDeleteAccount={handleDeleteAccount}
               lang={currentLang}
             />
           </TabsContent>
