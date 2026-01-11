@@ -15,7 +15,7 @@ import { generatePDF } from '@/lib/pdf'
 import type { PilotProfile, FlightEntry, FilterScope } from '@/lib/types'
 import type { Language } from '@/lib/translations'
 import { t } from '@/lib/translations'
-import { Airplane } from '@phosphor-icons/react'
+import { Fan } from '@phosphor-icons/react'
 
 function App() {
   const [profile, setProfile] = useKV<PilotProfile | null>('pilot-profile', null)
@@ -134,7 +134,7 @@ function App() {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="p-2 bg-primary rounded-lg">
-                <Airplane size={28} className="text-primary-foreground" weight="bold" />
+                <Fan size={28} className="text-primary-foreground" weight="bold" />
               </div>
               <div>
                 <h1 className="text-xl font-bold text-foreground tracking-tight">
