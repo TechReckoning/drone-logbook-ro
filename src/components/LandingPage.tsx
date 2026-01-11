@@ -179,15 +179,91 @@ export function LandingPage({ onGetStarted, lang, toggleLanguage }: LandingPageP
   const t = content[lang]
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-secondary to-muted">
+    <div className="min-h-screen bg-background relative overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-accent/5" />
+      
+      <motion.div 
+        className="absolute top-0 left-0 w-[500px] h-[500px] rounded-full bg-primary/10 blur-[100px]"
+        animate={{
+          x: [0, 100, 0],
+          y: [0, 50, 0],
+          scale: [1, 1.1, 1],
+        }}
+        transition={{
+          duration: 20,
+          repeat: Infinity,
+          ease: "easeInOut"
+        }}
+      />
+      
+      <motion.div 
+        className="absolute bottom-0 right-0 w-[600px] h-[600px] rounded-full bg-accent/10 blur-[120px]"
+        animate={{
+          x: [0, -80, 0],
+          y: [0, -60, 0],
+          scale: [1, 1.2, 1],
+        }}
+        transition={{
+          duration: 25,
+          repeat: Infinity,
+          ease: "easeInOut"
+        }}
+      />
+      
+      <motion.div 
+        className="absolute top-1/2 left-1/2 w-[400px] h-[400px] rounded-full bg-primary/5 blur-[80px]"
+        animate={{
+          x: [-200, -150, -200],
+          y: [-200, -250, -200],
+          scale: [1, 1.15, 1],
+        }}
+        transition={{
+          duration: 18,
+          repeat: Infinity,
+          ease: "easeInOut"
+        }}
+      />
+
       <div 
-        className="absolute inset-0 opacity-[0.03]"
+        className="absolute inset-0 opacity-[0.015]"
         style={{
           backgroundImage: `repeating-linear-gradient(0deg, transparent, transparent 2px, currentColor 2px, currentColor 4px),
                             repeating-linear-gradient(90deg, transparent, transparent 2px, currentColor 2px, currentColor 4px)`,
-          backgroundSize: '40px 40px'
+          backgroundSize: '50px 50px'
         }}
       />
+
+      <svg className="absolute inset-0 w-full h-full opacity-[0.02]" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <pattern id="drone-pattern" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
+            <motion.circle 
+              cx="50" 
+              cy="50" 
+              r="2" 
+              fill="currentColor"
+              animate={{ opacity: [0.3, 0.8, 0.3] }}
+              transition={{ duration: 3, repeat: Infinity }}
+            />
+            <motion.circle 
+              cx="20" 
+              cy="30" 
+              r="1.5" 
+              fill="currentColor"
+              animate={{ opacity: [0.2, 0.6, 0.2] }}
+              transition={{ duration: 4, repeat: Infinity, delay: 0.5 }}
+            />
+            <motion.circle 
+              cx="80" 
+              cy="70" 
+              r="1.5" 
+              fill="currentColor"
+              animate={{ opacity: [0.2, 0.7, 0.2] }}
+              transition={{ duration: 3.5, repeat: Infinity, delay: 1 }}
+            />
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#drone-pattern)" />
+      </svg>
       
       <div className="relative">
         <header className="border-b bg-card/80 backdrop-blur-sm sticky top-0 z-50">
@@ -220,9 +296,34 @@ export function LandingPage({ onGetStarted, lang, toggleLanguage }: LandingPageP
           </div>
         </header>
 
-        <section className="container mx-auto px-4 py-20 md:py-32">
+        <section className="container mx-auto px-4 py-20 md:py-32 relative">
+          {[...Array(6)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute text-primary/10"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+              }}
+              animate={{
+                x: [0, Math.random() * 200 - 100],
+                y: [0, Math.random() * 200 - 100],
+                rotate: [0, 360],
+                scale: [1, 1.2, 1],
+              }}
+              transition={{
+                duration: 15 + Math.random() * 10,
+                repeat: Infinity,
+                ease: "linear",
+                delay: i * 2,
+              }}
+            >
+              <Fan size={24 + Math.random() * 32} weight="bold" />
+            </motion.div>
+          ))}
+          
           <motion.div 
-            className="max-w-4xl mx-auto text-center"
+            className="max-w-4xl mx-auto text-center relative z-10"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
@@ -256,9 +357,36 @@ export function LandingPage({ onGetStarted, lang, toggleLanguage }: LandingPageP
           </motion.div>
         </section>
 
-        <section id="features" className="container mx-auto px-4 py-20">
+        <section id="features" className="container mx-auto px-4 py-20 relative">
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            <svg className="absolute w-full h-full opacity-5" xmlns="http://www.w3.org/2000/svg">
+              <motion.path
+                d="M 0 100 Q 200 50, 400 100 T 800 100"
+                stroke="currentColor"
+                strokeWidth="2"
+                fill="none"
+                strokeDasharray="10,5"
+                initial={{ pathLength: 0, opacity: 0 }}
+                whileInView={{ pathLength: 1, opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 3, ease: "easeInOut" }}
+              />
+              <motion.path
+                d="M 800 200 Q 600 150, 400 200 T 0 200"
+                stroke="currentColor"
+                strokeWidth="2"
+                fill="none"
+                strokeDasharray="10,5"
+                initial={{ pathLength: 0, opacity: 0 }}
+                whileInView={{ pathLength: 1, opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 3, ease: "easeInOut", delay: 0.5 }}
+              />
+            </svg>
+          </div>
+          
           <motion.div 
-            className="text-center mb-16"
+            className="text-center mb-16 relative z-10"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
@@ -269,7 +397,7 @@ export function LandingPage({ onGetStarted, lang, toggleLanguage }: LandingPageP
             </h3>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto relative z-10">
             {t.features.items.map((feature, index) => {
               const Icon = feature.icon
               return (
@@ -280,11 +408,15 @@ export function LandingPage({ onGetStarted, lang, toggleLanguage }: LandingPageP
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                 >
-                  <Card className="h-full hover:shadow-lg transition-shadow">
+                  <Card className="h-full hover:shadow-lg transition-all hover:-translate-y-1">
                     <CardHeader>
-                      <div className="p-3 bg-primary/10 rounded-lg w-fit mb-4">
+                      <motion.div 
+                        className="p-3 bg-primary/10 rounded-lg w-fit mb-4"
+                        whileHover={{ scale: 1.1, rotate: 5 }}
+                        transition={{ type: "spring", stiffness: 300 }}
+                      >
                         <Icon size={32} className="text-primary" weight="bold" />
-                      </div>
+                      </motion.div>
                       <CardTitle className="text-xl">{feature.title}</CardTitle>
                     </CardHeader>
                     <CardContent>
@@ -299,9 +431,11 @@ export function LandingPage({ onGetStarted, lang, toggleLanguage }: LandingPageP
           </div>
         </section>
 
-        <section className="container mx-auto px-4 py-20 bg-muted/50">
+        <section className="container mx-auto px-4 py-20 relative">
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-muted/30 to-transparent" />
+          
           <motion.div 
-            className="text-center mb-16"
+            className="text-center mb-16 relative z-10"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
@@ -312,14 +446,15 @@ export function LandingPage({ onGetStarted, lang, toggleLanguage }: LandingPageP
             </h3>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto relative z-10">
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
+              whileHover={{ scale: 1.02 }}
             >
-              <Card className="h-full">
+              <Card className="h-full backdrop-blur-sm bg-card/80">
                 <CardHeader className="pb-8">
                   <CardTitle className="text-2xl">{t.pricing.free.title}</CardTitle>
                   <div className="mt-4">
@@ -356,12 +491,24 @@ export function LandingPage({ onGetStarted, lang, toggleLanguage }: LandingPageP
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
+              whileHover={{ scale: 1.02 }}
             >
-              <Card className="h-full border-primary border-2 relative overflow-hidden">
-                <div className="absolute top-4 right-4 bg-accent text-accent-foreground text-xs font-bold px-3 py-1 rounded-full">
+              <Card className="h-full border-primary border-2 relative overflow-hidden backdrop-blur-sm bg-card/80">
+                <motion.div 
+                  className="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5"
+                  animate={{
+                    opacity: [0.3, 0.5, 0.3],
+                  }}
+                  transition={{
+                    duration: 4,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                />
+                <div className="absolute top-4 right-4 bg-accent text-accent-foreground text-xs font-bold px-3 py-1 rounded-full z-10">
                   {t.pricing.pro.popular}
                 </div>
-                <CardHeader className="pb-8">
+                <CardHeader className="pb-8 relative z-10">
                   <CardTitle className="text-2xl">{t.pricing.pro.title}</CardTitle>
                   <div className="mt-4">
                     <span className="text-4xl font-bold">{t.pricing.pro.price}</span>
@@ -374,7 +521,7 @@ export function LandingPage({ onGetStarted, lang, toggleLanguage }: LandingPageP
                     {t.pricing.pro.description}
                   </CardDescription>
                 </CardHeader>
-                <CardContent className="space-y-6">
+                <CardContent className="space-y-6 relative z-10">
                   <ul className="space-y-3">
                     {t.pricing.pro.features.map((feature, index) => (
                       <li key={index} className="flex items-start gap-3">
