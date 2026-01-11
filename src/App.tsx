@@ -161,13 +161,11 @@ function App() {
 
       <main className="container mx-auto px-4 py-8">
         <Tabs value={activeTab} onValueChange={setActiveTab}>
-          <TabsList className="grid w-full max-w-3xl mx-auto grid-cols-6 mb-8">
+          <TabsList className="grid w-full max-w-2xl mx-auto grid-cols-4 mb-8">
             <TabsTrigger value="dashboard">{text.nav.dashboard}</TabsTrigger>
             <TabsTrigger value="logbook">{text.nav.logbook}</TabsTrigger>
             <TabsTrigger value="profile">{text.nav.profile}</TabsTrigger>
             <TabsTrigger value="billing">{text.nav.billing}</TabsTrigger>
-            <TabsTrigger value="privacy">{text.nav.privacy}</TabsTrigger>
-            <TabsTrigger value="terms">{text.nav.terms}</TabsTrigger>
           </TabsList>
 
           <TabsContent value="dashboard">
@@ -250,6 +248,30 @@ function App() {
       />
 
       <Toaster position="top-center" />
+
+      <footer className="border-t bg-card mt-16">
+        <div className="container mx-auto px-4 py-6">
+          <div className="flex items-center justify-center gap-6">
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setActiveTab('privacy')}
+              className="text-muted-foreground hover:text-foreground"
+            >
+              {text.nav.privacy}
+            </Button>
+            <div className="w-px h-4 bg-border" />
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setActiveTab('terms')}
+              className="text-muted-foreground hover:text-foreground"
+            >
+              {text.nav.terms}
+            </Button>
+          </div>
+        </div>
+      </footer>
     </div>
   )
 }
